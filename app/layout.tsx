@@ -20,14 +20,14 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: "https://raihanratul.com",
+    url: "https://raihanratul.com.bd",
     siteName: "Dev Portfolio",
     title: "Raihan Islam Ratul | Python & Django Specialist",
     description:
       "Explore my portfolio showcasing responsive web design, full-stack development with React, Next.js, Python, and Django.",
     images: [
       {
-        url: "https://raihanratul.com/profile.jpg",
+        url: "https://raihanratul.com.bd/profile.jpg",
         width: 1200,
         height: 630,
         alt: "Portfolio Preview",
@@ -40,12 +40,12 @@ export const metadata: Metadata = {
     title: "Raihan Islam Ratul | Python & Django Specialist",
     description:
       "Full-stack developer specializing in Python Django, Flask, and modern restful api technologies.",
-    images: ["https://raihanratul.com/profile.jpg"],
+    images: ["https://raihanratul.com.bd/profile.jpg"],
   },
   robots: "index, follow",
   viewport: "width=device-width, initial-scale=1",
   alternates: {
-    canonical: "https://raihanratul.com",
+    canonical: "https://raihanratul.com.bd",
   },
 };
 
@@ -58,7 +58,7 @@ export default function RootLayout({
     "@context": "https://schema.org",
     "@type": "Person",
     name: "Full-Stack Developer",
-    url: "https://raihanratul.com",
+    url: "https://raihanratul.com.bd",
     jobTitle: "Full-stack Developer",
     sameAs: [
       "https://linkedin.com/in/raihanratul2",
