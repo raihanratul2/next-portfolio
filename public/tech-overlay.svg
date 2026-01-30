@@ -1,0 +1,167 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800" preserveAspectRatio="none">
+  <defs>
+    <!-- Soft cyan glow for a few accent elements. -->
+    <filter id="glowCyan" x="-50%" y="-50%" width="200%" height="200%" color-interpolation-filters="sRGB">
+      <feGaussianBlur stdDeviation="2.2" result="blur" />
+      <feColorMatrix
+        in="blur"
+        type="matrix"
+        values="
+          0 0 0 0 0.00
+          0 0 0 0 0.90
+          0 0 0 0 1.00
+          0 0 0 0.55 0
+        "
+        result="cyan"
+      />
+      <feMerge>
+        <feMergeNode in="cyan" />
+        <feMergeNode in="SourceGraphic" />
+      </feMerge>
+    </filter>
+
+    <!-- Subtle thin grid (SVG pattern). -->
+    <pattern id="gridSmall" width="48" height="48" patternUnits="userSpaceOnUse">
+      <path d="M 48 0 H 0 V 48" fill="none" stroke="#94a3b8" stroke-opacity="0.08" stroke-width="1" />
+    </pattern>
+
+    <!-- Larger grid accents (SVG pattern). -->
+    <pattern id="gridLarge" width="240" height="240" patternUnits="userSpaceOnUse">
+      <path d="M 240 0 H 0 V 240" fill="none" stroke="#38bdf8" stroke-opacity="0.07" stroke-width="1" />
+    </pattern>
+
+    <!-- Micro dots (SVG pattern) for minimal atmosphere. -->
+    <pattern id="microDots" width="36" height="36" patternUnits="userSpaceOnUse">
+      <circle cx="2" cy="2" r="1" fill="#cbd5e1" opacity="0.06" />
+    </pattern>
+
+    <!-- Vignette (keeps edges calm). -->
+    <radialGradient id="v" cx="50%" cy="45%" r="72%">
+      <stop offset="0%" stop-color="rgba(0,0,0,0)" />
+      <stop offset="70%" stop-color="rgba(0,0,0,0.18)" />
+      <stop offset="100%" stop-color="rgba(0,0,0,0.45)" />
+    </radialGradient>
+  </defs>
+
+  <!-- Grid layers (≈5–10% visible). -->
+  <rect width="1200" height="800" fill="url(#gridSmall)" />
+  <rect width="1200" height="800" fill="url(#gridLarge)" />
+  <rect width="1200" height="800" fill="url(#microDots)" opacity="0.25" />
+
+  <!-- Circuit-style orthogonal lines (handcrafted, 90° turns). -->
+  <g fill="none" stroke-linecap="round" stroke-linejoin="round">
+    <!-- Base low-contrast lines -->
+    <path
+      d="M 90 120 H 360 V 200 H 540 M 540 200 V 360 H 720 V 430 H 1040"
+      stroke="#94a3b8"
+      stroke-opacity="0.10"
+      stroke-width="1"
+    />
+    <path
+      d="M 160 640 H 440 V 540 H 620 V 600 H 860 V 500 H 1060"
+      stroke="#94a3b8"
+      stroke-opacity="0.10"
+      stroke-width="1"
+    />
+    <path
+      d="M 1040 90 V 260 H 920 V 310 H 820 V 190 H 700"
+      stroke="#94a3b8"
+      stroke-opacity="0.10"
+      stroke-width="1"
+    />
+    <path
+      d="M 260 60 V 180 H 160 V 300 H 280 V 420 H 460"
+      stroke="#94a3b8"
+      stroke-opacity="0.10"
+      stroke-width="1"
+    />
+
+    <!-- Accent/glow lines (very faint) -->
+    <path
+      d="M 80 340 H 260 V 280 H 460 V 340 H 560 V 300 H 700"
+      stroke="#22d3ee"
+      stroke-opacity="0.14"
+      stroke-width="1.2"
+      filter="url(#glowCyan)"
+    />
+    <path
+      d="M 780 700 V 600 H 920 V 540 H 1080"
+      stroke="#38bdf8"
+      stroke-opacity="0.13"
+      stroke-width="1.2"
+      filter="url(#glowCyan)"
+    />
+    <path
+      d="M 540 140 V 90 H 720 V 200 H 920"
+      stroke="#22d3ee"
+      stroke-opacity="0.13"
+      stroke-width="1.2"
+      filter="url(#glowCyan)"
+    />
+  </g>
+
+  <!-- Nodes and geometric marks at intersections. -->
+  <g>
+    <!-- Circular nodes -->
+    <g fill="#e2e8f0" opacity="0.12">
+      <circle cx="360" cy="200" r="3" />
+      <circle cx="540" cy="200" r="2.6" />
+      <circle cx="540" cy="360" r="2.6" />
+      <circle cx="720" cy="430" r="2.4" />
+      <circle cx="440" cy="540" r="2.6" />
+      <circle cx="620" cy="540" r="2.2" />
+      <circle cx="860" cy="600" r="2.6" />
+      <circle cx="920" cy="260" r="2.4" />
+      <circle cx="820" cy="310" r="2.4" />
+      <circle cx="280" cy="300" r="2.4" />
+      <circle cx="280" cy="420" r="2.4" />
+    </g>
+
+    <!-- Glowing nodes (few only) -->
+    <g filter="url(#glowCyan)">
+      <circle cx="460" cy="340" r="3" fill="#22d3ee" opacity="0.20" />
+      <circle cx="920" cy="540" r="3" fill="#38bdf8" opacity="0.19" />
+      <circle cx="720" cy="90" r="3" fill="#22d3ee" opacity="0.19" />
+    </g>
+
+    <!-- Tiny squares -->
+    <g fill="none" stroke="#94a3b8" stroke-width="1" stroke-opacity="0.12">
+      <rect x="532" y="132" width="16" height="16" rx="2" />
+      <rect x="252" y="52" width="16" height="16" rx="2" />
+      <rect x="1018" y="82" width="16" height="16" rx="2" />
+      <rect x="752" y="682" width="16" height="16" rx="2" />
+    </g>
+
+    <!-- Hollow triangles -->
+    <g fill="none" stroke="#cbd5e1" stroke-width="1" stroke-opacity="0.12">
+      <polygon points="700,282 712,302 688,302" />
+      <polygon points="260,270 272,290 248,290" />
+      <polygon points="1080,532 1092,552 1068,552" />
+    </g>
+
+    <!-- A couple glowing shapes for blueprint feel -->
+    <g filter="url(#glowCyan)">
+      <rect
+        x="532"
+        y="292"
+        width="14"
+        height="14"
+        rx="2"
+        fill="none"
+        stroke="#22d3ee"
+        stroke-width="1.2"
+        stroke-opacity="0.20"
+      />
+      <polygon
+        points="920,522 932,542 908,542"
+        fill="none"
+        stroke="#38bdf8"
+        stroke-width="1.2"
+        stroke-opacity="0.18"
+      />
+    </g>
+  </g>
+
+  <rect width="1200" height="800" fill="url(#v)" />
+</svg>
+
