@@ -15,14 +15,14 @@ export const metadata: Metadata = {
   description:
     "Explore my portfolio showcasing responsive web design, full-stack development with React, Next.js, Python, and Django. Modern UI/UX with Tailwind CSS.",
   keywords: ["Frontend Developer", "React", "Next.js", "Web Developer", "Full Stack", "JavaScript", "Python"],
-  authors: [{ name: "Developer" }],
+  authors: [{ name: "Raihan Islam Ratul" }],
   creator: "Full-Stack Developer",
   openGraph: {
     type: "website",
     locale: "en_US",
     url: "https://raihanratul.com",
     siteName: "Dev Portfolio",
-    title: "Full-Stack Developer Portfolio | Python & Django Specialist",
+    title: "Raihan Islam Ratul | Python & Django Specialist",
     description:
       "Explore my portfolio showcasing responsive web design, full-stack development with React, Next.js, Python, and Django.",
     images: [
@@ -37,7 +37,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Full-Stack Developer Portfolio",
+    title: "Raihan Islam Ratul | Python & Django Specialist",
     description:
       "Full-stack developer specializing in Python Django, Flask, and modern restful api technologies.",
     images: ["https://raihanratul.com/profile.jpg"],
