@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import Link from "next/link";
 import { ArrowUpRight, Moon, Sun } from "lucide-react";
 import { navLinks } from "@/app/constants/data";
@@ -7,6 +8,7 @@ import { useTheme } from "@/app/context/ThemeContext";
 
 export function Header() {
   const { theme, toggleTheme } = useTheme();
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   return (
     <header className="sticky top-0 z-50 border-b border-[var(--border)] bg-[var(--background)] backdrop-blur-xl transition-colors">
@@ -58,26 +60,38 @@ export function Header() {
           </a>
 
           {/* Mobile nav */}
-          <details className="relative md:hidden">
-            <summary className="btn-ghost list-none">Menu</summary>
-            <div className="absolute right-0 mt-3 w-56 overflow-hidden rounded-2xl border border-[var(--border)] bg-[var(--panel)] shadow-lg">
+          <button
+            onClick={() => setIsMenuOpen(!isMenuOpen)}
+            className="btn-ghost md:hidden"
+            aria-label="Toggle menu"
+          >
+            Menu
+          </button>
+
+          {isMenuOpen && (
+            <div className="absolute right-4 top-16 w-56 overflow-hidden rounded-2xl border border-[var(--border)] bg-[var(--panel)] shadow-lg md:hidden">
               <div className="p-2">
                 {navLinks.map((l) => (
                   <a
                     key={l.href}
                     href={l.href}
+                    onClick={() => setIsMenuOpen(false)}
                     className="block rounded-xl px-3 py-2 text-sm tracking-widest text-[color:var(--muted)] hover:bg-[var(--panel-strong)] hover:text-[color:var(--foreground)] transition"
                   >
                     {l.label}
                   </a>
                 ))}
-                <a href="#contact" className="mt-2 btn-gradient w-full justify-center">
+                <a
+                  href="#contact"
+                  onClick={() => setIsMenuOpen(false)}
+                  className="mt-2 btn-gradient w-full justify-center"
+                >
                   Hire Me
                   <ArrowUpRight className="h-4 w-4" />
                 </a>
               </div>
             </div>
-          </details>
+          )}
         </div>
       </div>
     </header>
