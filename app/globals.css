@@ -145,6 +145,70 @@ html {
     flex-direction: column;
   }
 
+  .portfolio-bg > .site-header {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+  }
+
+  .section-space {
+    padding-inline: 1rem;
+    padding-top: clamp(4rem, 8vw, 7rem);
+  }
+
+  .nav-link {
+    font-size: 0.875rem;
+    color: var(--muted);
+    transition: color 180ms ease;
+  }
+
+  .brand-logo-dark,
+  [data-theme="light"] .brand-logo-light {
+    display: block;
+  }
+
+  .brand-logo-light,
+  [data-theme="light"] .brand-logo-dark {
+    display: none;
+  }
+
+  .nav-link:hover,
+  .nav-link[aria-current="page"] {
+    color: var(--glow-cyan);
+  }
+
+  .text-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+  }
+
+  .text-link:hover {
+    color: var(--glow-cyan);
+  }
+
+  .project-card {
+    background-image: radial-gradient(ellipse at top right, var(--depth-tint), transparent 70%);
+  }
+
+  .skip-link {
+    position: fixed;
+    left: 1rem;
+    top: -8rem;
+    padding: 1rem;
+    border-radius: 0.75rem;
+    background: var(--foreground);
+    color: var(--background);
+  }
+
+  .portfolio-bg > .skip-link:focus {
+    position: fixed;
+    top: 1rem;
+    z-index: 100;
+  }
+
   .container {
     width: 100%;
     max-width: 72rem; /* ~1152px */
@@ -333,5 +397,25 @@ html {
     transform: translateY(-1px);
     border-color: var(--glow-purple);
     background: var(--panel-strong);
+  }
+}
+
+:is(a, button):focus-visible {
+  outline: 2px solid var(--glow-cyan);
+  outline-offset: 4px;
+}
+
+button {
+  cursor: pointer;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *, *::before, *::after {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
   }
 }

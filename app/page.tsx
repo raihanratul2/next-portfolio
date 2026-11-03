@@ -1,27 +1,20 @@
-"use client";
-
-import dynamic from "next/dynamic";
+import type { Metadata } from "next";
 import { HeroSection } from "@/app/components/HeroSection";
-import { AboutSection } from "@/app/components/AboutSection";
 import { ExperienceSection } from "@/app/components/ExperienceSection";
 import { ProjectsSection } from "@/app/components/ProjectsSection";
-import { ContactSection } from "@/app/components/ContactSection";
+import { PreviousWorksSection } from "@/app/components/PreviousWorksSection";
+import { IdeaCTA } from "@/app/components/IdeaCTA";
 
-const Header = dynamic(() => import("@/app/components/Header").then(mod => ({ default: mod.Header })), {
-  ssr: false,
-});
+export const metadata: Metadata = { alternates: { canonical: "/" } };
 
 export default function HomePage() {
   return (
-    <div className="app-shell portfolio-bg text-[var(--foreground)]">
-      <Header />
-      <main className="app-main">
-        <HeroSection />
-        <AboutSection />
-        <ExperienceSection />
-        <ProjectsSection />
-        <ContactSection />
-      </main>
-    </div>
+    <>
+      <HeroSection />
+      <ProjectsSection preview />
+      <PreviousWorksSection preview />
+      <ExperienceSection preview />
+      <IdeaCTA />
+    </>
   );
 }

@@ -1,8 +1,9 @@
 "use client";
 
 import React, { createContext, useContext, useEffect, useState } from "react";
+import { brandAssets, type BrandTheme } from "@/app/constants/branding";
 
-type Theme = "dark" | "light";
+type Theme = BrandTheme;
 
 interface ThemeContextType {
   theme: Theme;
@@ -11,28 +12,61 @@ interface ThemeContextType {
 
 const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 
+function applyTheme(theme: Theme) {
+  document.documentElement.setAttribute("data-theme", theme);
+  const icons = brandAssets.favicon(theme);
+  document.querySelectorAll<HTMLLinkElement>('link[rel="icon"]').forEach((link) => {
+    const href = link.type === "image/svg+xml" ? icons.svg : link.type === "image/png" ? icons.png : icons.ico;
+    if (link.getAttribute("href") !== href) link.setAttribute("href", href);
+  });
+  document.querySelectorAll<HTMLLinkElement>('link[rel="apple-touch-icon"]').forEach((link) => {
+    if (link.getAttribute("href") !== icons.apple) link.setAttribute("href", icons.apple);
+  });
+  document.querySelectorAll<HTMLMetaElement>('meta[name="theme-color"]').forEach((meta) => {
+    meta.content = theme === "light" ? "#ffffff" : "#05070a";
+  });
+}
+
 export function ThemeProvider({ children }: { children: React.ReactNode }) {
   const [theme, setTheme] = useState<Theme>("dark");
-  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
-    setMounted(true);
-    const stored = localStorage.getItem("theme") as Theme | null;
-    const initial = stored || "dark";
+    let initial: Theme = "dark";
+    try {
+      if (localStorage.getItem("theme") === "light") initial = "light";
+    } catch {
+      // Use the default theme when browser storage is unavailable.
+    }
     setTheme(initial);
-    document.documentElement.setAttribute("data-theme", initial);
+    applyTheme(initial);
+
+    // Next.js can insert icon metadata after hydration or page navigation.
+    const observer = new MutationObserver(() => {
+      applyTheme(document.documentElement.dataset.theme === "light" ? "light" : "dark");
+    });
+    observer.observe(document.head, {
+      childList: true,
+      subtree: true,
+      attributes: true,
+      attributeFilter: ["href", "rel", "type"],
+    });
+    return () => observer.disconnect();
   }, []);
 
   const toggleTheme = () => {
     const newTheme = theme === "dark" ? "light" : "dark";
     setTheme(newTheme);
-    localStorage.setItem("theme", newTheme);
-    document.documentElement.setAttribute("data-theme", newTheme);
+    applyTheme(newTheme);
+    try {
+      localStorage.setItem("theme", newTheme);
+    } catch {
+      // Theme switching still works without persistent browser storage.
+    }
   };
 
   return (
     <ThemeContext.Provider value={{ theme, toggleTheme }}>
-      {mounted ? children : <>{children}</>}
+      {children}
     </ThemeContext.Provider>
   );
 }

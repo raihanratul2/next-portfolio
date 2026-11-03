@@ -1,7 +1,10 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Montserrat } from "next/font/google";
 import { ThemeProvider } from "@/app/context/ThemeContext";
 import { SpeedInsights } from "@vercel/speed-insights/next";
+import { Header } from "@/app/components/Header";
+import { Footer } from "@/app/components/Footer";
+import { brandAssets } from "@/app/constants/branding";
 
 import "./globals.css";
 
@@ -12,7 +15,11 @@ const montserrat = Montserrat({
 });
 
 export const metadata: Metadata = {
-  title: "Raihan Islam Ratul | Python & Django Specialist",
+  metadataBase: new URL("https://raihanratul.com.bd"),
+  title: {
+    default: "Raihan Islam Ratul | Python & Django Specialist",
+    template: "%s | Raihan Islam Ratul",
+  },
   description:
     "Explore my portfolio showcasing responsive web design, full-stack development with React, Next.js, Python, and Django. Modern UI/UX with Tailwind CSS.",
   keywords: ["Frontend Developer", "React", "Next.js", "Web Developer", "Full Stack", "JavaScript", "Python"],
@@ -44,11 +51,16 @@ export const metadata: Metadata = {
     images: ["https://raihanratul.com.bd/profile.jpg"],
   },
   robots: "index, follow",
-  viewport: "width=device-width, initial-scale=1",
-  alternates: {
-    canonical: "https://raihanratul.com.bd",
+  icons: {
+    icon: [
+      { url: brandAssets.favicon("dark").png, type: "image/png", sizes: "32x32" },
+      { url: brandAssets.adaptiveFavicon, type: "image/svg+xml", sizes: "any" },
+    ],
+    apple: [{ url: brandAssets.favicon("dark").apple, sizes: "180x180", type: "image/png" }],
   },
 };
+
+export const viewport: Viewport = { width: "device-width", initialScale: 1, themeColor: "#05070a" };
 
 export default function RootLayout({
   children,
@@ -58,7 +70,7 @@ export default function RootLayout({
   const structuredData = {
     "@context": "https://schema.org",
     "@type": "Person",
-    name: "Full-Stack Developer",
+    name: "Raihan Islam Ratul",
     url: "https://raihanratul.com.bd",
     jobTitle: "Full-stack Developer",
     sameAs: [
@@ -80,6 +92,7 @@ export default function RootLayout({
   return (
     <html lang="en" className="scroll-smooth" suppressHydrationWarning>
       <head>
+        <script dangerouslySetInnerHTML={{ __html: 'try{document.documentElement.dataset.theme=localStorage.getItem("theme")==="light"?"light":"dark"}catch{document.documentElement.dataset.theme="dark"}' }} />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
@@ -87,14 +100,20 @@ export default function RootLayout({
         <meta name="mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-        <meta name="theme-color" content="#0a0a0a" />
       </head>
       <body
         className={`${montserrat.variable} antialiased`}
         style={{ backgroundColor: "var(--background)", color: "var(--foreground)" }}
       >
         <ThemeProvider>
-          {children}
+          <div className="app-shell portfolio-bg text-[var(--foreground)]">
+            <a href="#main-content" className="skip-link">Skip to content</a>
+            <Header />
+            <main id="main-content" tabIndex={-1} className="app-main pb-20 sm:pb-24">
+              {children}
+            </main>
+            <Footer />
+          </div>
         </ThemeProvider>
         <SpeedInsights />
       </body>

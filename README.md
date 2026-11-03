@@ -42,5 +42,10 @@ Then configure GitHub:
 
 ## Notes
 
+- Header and footer logos follow the selected theme. Favicons include theme-specific SVG, PNG, ICO, and Apple touch versions.
+- After editing the two source SVGs in `public/logos/`, run `npm run generate:brand` to rebuild compact logo marks and favicons.
+- Pages: `/`, `/about`, `/clients`, `/projects`, `/previous-works`, `/experience`, and `/contact`.
+- Home previews projects, previous work, and experience. The company list appears only on `/clients`.
+- Add client companies and their support details to `clients` in `app/constants/data.ts`. Use `projectIds` to link a company to an existing project, or an empty array for support-only work.
 - Project data lives in app/constants/data.ts
 - SEO and metadata live in app/layout.tsx

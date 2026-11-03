@@ -1,5 +1,6 @@
 import { ArrowUpRight } from "lucide-react";
-import { tech } from "@/app/constants/data";
+import Link from "next/link";
+import { contactUrl, tech } from "@/app/constants/data";
 
 export function HeroSection() {
   return (
@@ -7,17 +8,17 @@ export function HeroSection() {
       <div className="mx-auto max-w-6xl">
         <div className="mx-auto max-w-3xl text-center">
           <p className="text-sm tracking-[0.35em] text-[color:var(--muted)]">
-            HI, I'M <span className="text-[color:var(--foreground)]">Raihan</span>
+            HI, I&apos;M <span className="text-[color:var(--foreground)]">Raihan</span>
           </p>
           <h1 className="mt-5 text-balance text-4xl font-semibold tracking-tight sm:text-6xl">
-            Full-Stack Developer
+            AN IT ENTHUSIAST
           </h1>
           <p className="mt-5 text-pretty text-[color:var(--muted)] leading-relaxed">
             Backend engineer with Python & Django expertise. I build scalable APIs, RESTful services, and full-stack applications with clean, maintainable code. Also craft modern, responsive frontends with React & Next.js.
           </p>
 
           <div className="mt-10 flex flex-wrap items-center justify-center gap-3">
-            {tech.slice(0, 4).map(({ label, Icon }) => (
+            {tech.map(({ label, Icon }) => (
               <div key={label} className="chip">
                 <Icon className="h-4 w-4" />
                 <span className="text-xs tracking-widest">{label}</span>
@@ -26,12 +27,12 @@ export function HeroSection() {
           </div>
 
           <div className="mt-10 flex flex-col items-center justify-center gap-3 sm:flex-row">
-            <a href="#projects" className="btn-gradient w-full sm:w-auto">
+            <Link href="/projects" className="btn-gradient w-full justify-center sm:w-auto">
               View Projects
               <ArrowUpRight className="h-4 w-4" />
-            </a>
-            <a href="#contact" className="btn-ghost w-full sm:w-auto">
-              Contact
+            </Link>
+            <a href={contactUrl} className="btn-ghost w-full justify-center sm:w-auto">
+              Got an idea?
               <svg
                 className="h-4 w-4"
                 fill="none"
@@ -47,6 +48,7 @@ export function HeroSection() {
               </svg>
             </a>
           </div>
+          <Link href="/about" className="text-link mt-7 text-sm">More about me <ArrowUpRight className="h-4 w-4" /></Link>
         </div>
       </div>
     </section>

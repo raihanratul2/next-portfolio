@@ -9,6 +9,7 @@ const nextConfig: NextConfig = {
   images: { unoptimized: true },
   basePath,
   assetPrefix: basePath,
+  env: { NEXT_PUBLIC_BASE_PATH: basePath },
   allowedDevOrigins: ["http://localhost:3000", "http://localhost:3001"],
 };
 
